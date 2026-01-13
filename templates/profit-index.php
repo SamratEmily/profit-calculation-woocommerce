@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
     <h1 class="wp-heading-inline"><?php esc_html_e( 'Profit Calculation', 'profit-calculation' ); ?></h1>
+    <h4> <?php esc_html_e( 'Profit is calculated automatically and is shown only for products with a buying price.', 'profit-calculation' ); ?></h4>
     <form method="post">
         <?php
         // $table is passed from the calling function

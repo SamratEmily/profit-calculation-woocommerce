@@ -40,14 +40,23 @@ class ProductMeta {
      * Add Buying Price field
      */
     public function add_buying_price_field() {
+        global $post;
         wp_nonce_field( 'profit_calculation_save_data', 'profit_calculation_meta_nonce' );
+
+        $product      = wc_get_product( $post->ID );
+        $last_updated = $product ? $product->get_meta( '_buying_price_last_updated' ) : '';
+        $description  = '';
+
+        if ( $last_updated ) {
+            $description = '<strong>' . sprintf( esc_html__e( 'Last updated: %s', 'profit-calculation' ), date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_updated ) ) ) . '</strong>';
+        }
 
         woocommerce_wp_text_input(
             [
                 'id'          => '_buying_price',
-                'label'       => __( 'Buying Price(Before Profit)', 'profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
+                'label'       => __( 'Buying Price(inc. tax)', 'profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
                 'placeholder' => '',
-                'desc_tip'    => 'true',
+                'desc_tip'    => true,
                 'description' => __( 'Enter the buying price to calculate profit.', 'profit-calculation' ),
                 'type'        => 'number',
                 'custom_attributes' => [
@@ -57,6 +66,12 @@ class ProductMeta {
                 ],
             ]
         );
+
+        if ( $description ) {
+            echo '<p class="form-field _buying_price_last_updated_field" style="padding-left: 162px; margin-top: -10px; margin-bottom: 10px;">';
+            echo '<span class="description">' . wp_kses_post( $description ) . '</span>';
+            echo '</p>';
+        }
     }
 
     /**
@@ -80,6 +95,7 @@ class ProductMeta {
             }
             
             $product->update_meta_data( '_buying_price', $buying_price );
+            $product->update_meta_data( '_buying_price_last_updated', current_time( 'mysql' ) );
         }
     }
     
