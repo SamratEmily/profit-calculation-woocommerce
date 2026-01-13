@@ -61,7 +61,7 @@ class ProfitListTable extends \WP_List_Table {
                 $color = $item['profit'] >= 0 ? 'green' : 'red';
                 return '<span style="color:' . $color . '">' . wc_price( $item['profit'] ) . '</span>';
             default:
-                return esc_html( esc_html_e( "Not Applicable", 'profit-calculation' ) );
+                return esc_html__( 'Not Applicable', 'profit-calculation' );
         }
     }
 
@@ -73,7 +73,7 @@ class ProfitListTable extends \WP_List_Table {
     }
 
     public function prepare_items() {
-        $paged = $this->get_pagenum();
+        $profit_paged = $this->get_pagenum();
         $per_page = 20;
         // Fetch ALL orders to filter them correctly and calculate total profit
         $args = [
@@ -94,6 +94,9 @@ class ProfitListTable extends \WP_List_Table {
             $has_buying_price = false;
 
             foreach ( $order->get_items() as $item_id => $item ) {
+                if ( ! is_a( $item, 'WC_Order_Item_Product' ) ) {
+                    continue;
+                }
                 $product = $item->get_product();
                 if ( $product ) {
                     $qty = $item->get_quantity();
@@ -126,7 +129,7 @@ class ProfitListTable extends \WP_List_Table {
         
         // Use manual pagination on the filtered data
         $total_items = count( $data );
-        $this->items = array_slice( $data, ( ( $paged - 1 ) * $per_page ), $per_page );
+        $this->items = array_slice( $data, ( ( $profit_paged - 1 ) * $per_page ), $per_page );
 
         $this->set_pagination_args( [
             'total_items' => $total_items,
