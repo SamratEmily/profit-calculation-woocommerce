@@ -2,6 +2,10 @@
 
 namespace Emily\ProfitCalculation;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 class ProfitTable {
 
     /**
@@ -19,8 +23,8 @@ class ProfitTable {
         // Submenu Profit Calculation
         add_submenu_page(
             'woocommerce',
-            __( 'Profit Calculation', 'profit-calculation-woocommerce' ),
-            __( 'Profit Calculation', 'profit-calculation-woocommerce' ),
+            __( 'Profit Calculation', 'profit-calculation' ),
+            __( 'Profit Calculation', 'profit-calculation' ),
             'manage_woocommerce',
             'profit-calculation',
             [ $this, 'render_page' ]

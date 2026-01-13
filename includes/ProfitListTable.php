@@ -1,6 +1,10 @@
 <?php
 
 namespace Emily\ProfitCalculation;
+    
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
@@ -16,8 +20,8 @@ class ProfitListTable extends \WP_List_Table {
 
     public function __construct() {
         parent::__construct( [
-            'singular' => __( 'Profit', 'profit-calculation-woocommerce' ),
-            'plural'   => __( 'Profits', 'profit-calculation-woocommerce' ),
+            'singular' => __( 'Profit', 'profit-calculation' ),
+            'plural'   => __( 'Profits', 'profit-calculation' ),
             'ajax'     => false,
         ] );
     }
@@ -25,11 +29,11 @@ class ProfitListTable extends \WP_List_Table {
     public function get_columns() {
         return [
             'cb'      => '<input type="checkbox" />',
-            'order'   => __( 'Order', 'profit-calculation-woocommerce' ),
-            'date'    => __( 'Date', 'profit-calculation-woocommerce' ),
-            'selling' => __( 'Selling Price', 'profit-calculation-woocommerce' ),
-            'buying'  => __( 'Buying Price', 'profit-calculation-woocommerce' ),
-            'profit'  => __( 'Profit', 'profit-calculation-woocommerce' ),
+            'order'   => __( 'Order', 'profit-calculation' ),
+            'date'    => __( 'Date', 'profit-calculation' ),
+            'selling' => __( 'Selling Price', 'profit-calculation' ),
+            'buying'  => __( 'Buying Price', 'profit-calculation' ),
+            'profit'  => __( 'Profit', 'profit-calculation' ),
         ];
     }
 
@@ -57,7 +61,7 @@ class ProfitListTable extends \WP_List_Table {
                 $color = $item['profit'] >= 0 ? 'green' : 'red';
                 return '<span style="color:' . $color . '">' . wc_price( $item['profit'] ) . '</span>';
             default:
-                return print_r( $item, true );
+                return esc_html( esc_html_e( "Not Applicable", 'profit-calculation' ) );
         }
     }
 

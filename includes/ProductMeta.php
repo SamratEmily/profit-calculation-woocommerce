@@ -2,6 +2,10 @@
 
 namespace Emily\ProfitCalculation;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 class ProductMeta {
 
     /**
@@ -36,18 +40,20 @@ class ProductMeta {
      * Add Buying Price field
      */
     public function add_buying_price_field() {
+        wp_nonce_field( 'profit_calculation_save_data', 'profit_calculation_meta_nonce' );
+
         woocommerce_wp_text_input(
             [
                 'id'          => '_buying_price',
-                'label'       => __( 'Buying Price(Before Profit)', 'profit-calculation-woocommerce' ) . ' (' . get_woocommerce_currency_symbol() . ')',
+                'label'       => __( 'Buying Price(Before Profit)', 'profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
                 'placeholder' => '',
                 'desc_tip'    => 'true',
-                'description' => __( 'Enter the buying price to calculate profit.', 'profit-calculation-woocommerce' ),
+                'description' => __( 'Enter the buying price to calculate profit.', 'profit-calculation' ),
                 'type'        => 'number',
                 'custom_attributes' => [
                     'step' => 'any',
                     'min'  => '0',
-                    'required' => 'required', // HTML5 required
+                    'required' => 'required',
                 ],
             ]
         );
@@ -59,25 +65,21 @@ class ProductMeta {
      * @param \WC_Product $product
      */
     public function save_buying_price_field( $product ) {
+        // Nonce validation
+        if ( ! isset( $_POST['profit_calculation_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['profit_calculation_meta_nonce'] ) ), 'profit_calculation_save_data' ) ) {
+            return;
+        }
+
         // Check if our custom field is set
         if ( isset( $_POST['_buying_price'] ) ) {
-            $buying_price = wc_clean( $_POST['_buying_price'] );
+            $buying_price = sanitize_text_field( wp_unslash( $_POST['_buying_price'] ) );
             
             // Validation: Custom field is required
             if ( empty( $buying_price ) && '0' !== $buying_price ) {
-                 // We can use WC_Admin_Meta_Boxes::add_error but that's for before save usually. 
-                 // product_object save happens late.
-                 // Ideally we hook into 'woocommerce_process_product_meta' for simple products or generally before object save to stop it?
-                 // But validation in WC is tricky. "Required" usually implies "Add Error".
-                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'profit-calculation-woocommerce' ) );
-                 // If we want to actually stop the save or revert, it's harder with just this hook on the object.
-                 // But showing the error is the standard WC way.
+                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'profit-calculation' ) );
             }
             
             $product->update_meta_data( '_buying_price', $buying_price );
-        } else {
-             // If field is missing from POST (maybe quick edit? or something else), do nothing or validate if it's a full edit
-             // On strict save, we demand it.
         }
     }
     

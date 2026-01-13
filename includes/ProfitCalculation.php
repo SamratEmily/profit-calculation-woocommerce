@@ -2,6 +2,10 @@
 
 namespace Emily\ProfitCalculation;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Emily\ProfitCalculation\ProductMeta;
 use Emily\ProfitCalculation\ProfitTable;
 use Emily\ProfitCalculation\Assets;
@@ -88,6 +92,8 @@ final class ProfitCalculation {
      * @return void
      */
     public function init_plugin() {
+        // load_plugin_textdomain( 'profit-calculation', false, dirname( plugin_basename( PROFIT_CALCULATION_FILE ) ) . '/languages' );
+
         if ( ! class_exists( 'WooCommerce' ) ) {
             return;
         }

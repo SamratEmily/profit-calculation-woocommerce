@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name: Profit Calculation - WooCommerce
- * Plugin URI:  https://wordpress.org/plugins/search/profit-calculation-woocommerce/
+ * Plugin Name: Profit Calculation Ecommerce
+ * Plugin URI:  https://wordpress.org/plugins/search/profit-calculation/
  * Description: This plugin helps you to calculate profit for your WooCommerce products.
  * Version: 0.0.1
- * Author: SamratEmily
+ * Author: Samrat Hossen
  * Author URI: https://samrat-personal-portfolio.netlify.app
- * Text Domain: profit-calculation-woocommerce
+ * Text Domain: profit-calculation
  * WC requires at least: 5.0.0
- * Domain Path: /languages/
  * Requires Plugins: woocommerce
  * License: GPL2
+ * Tested up to: 6.9
  */
 
 use Emily\ProfitCalculation\ProfitCalculation;

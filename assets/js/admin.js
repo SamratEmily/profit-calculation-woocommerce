@@ -9,7 +9,7 @@ jQuery(function($){
             
             // Allow 0, but not empty
             if ( buyingPrice === '' ) {
-                alert('Buying Price is required!');
+                alert( wp.i18n.__( 'Buying Price is required!', 'profit-calculation-woocommerce' ) );
                 
                 // Switch to General tab if not active
                 $('.general_options').click();

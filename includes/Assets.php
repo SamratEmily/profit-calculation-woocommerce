@@ -2,6 +2,10 @@
 
 namespace Emily\ProfitCalculation;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 class Assets {
 
     /**
@@ -24,10 +28,11 @@ class Assets {
                 wp_enqueue_script(
                     'profit-calculation-admin',
                     PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
-                    [ 'jquery' ],
+                    [ 'jquery', 'wp-i18n' ],
                     PROFIT_CALCULATION_VERSION,
                     true
                 );
+                wp_set_script_translations( 'profit-calculation-admin', 'profit-calculation-woocommerce', PROFIT_CALCULATION_DIR . '/languages' );
             }
         }
 
