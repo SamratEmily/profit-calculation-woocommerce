@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\ProfitCalculation;
+namespace Emily\EcommerceProfitCalculation;
     
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -20,8 +20,8 @@ class ProfitListTable extends \WP_List_Table {
 
     public function __construct() {
         parent::__construct( [
-            'singular' => __( 'Profit', 'profit-calculation' ),
-            'plural'   => __( 'Profits', 'profit-calculation' ),
+            'singular' => __( 'Profit', 'ecommerce-profit-calculation' ),
+            'plural'   => __( 'Profits', 'ecommerce-profit-calculation' ),
             'ajax'     => false,
         ] );
     }
@@ -29,11 +29,11 @@ class ProfitListTable extends \WP_List_Table {
     public function get_columns() {
         return [
             'cb'      => '<input type="checkbox" />',
-            'order'   => __( 'Order', 'profit-calculation' ),
-            'date'    => __( 'Date', 'profit-calculation' ),
-            'selling' => __( 'Selling Price', 'profit-calculation' ),
-            'buying'  => __( 'Buying Price', 'profit-calculation' ),
-            'profit'  => __( 'Profit', 'profit-calculation' ),
+            'order'   => __( 'Order', 'ecommerce-profit-calculation' ),
+            'date'    => __( 'Date', 'ecommerce-profit-calculation' ),
+            'selling' => __( 'Selling Price', 'ecommerce-profit-calculation' ),
+            'buying'  => __( 'Buying Price', 'ecommerce-profit-calculation' ),
+            'profit'  => __( 'Profit', 'ecommerce-profit-calculation' ),
         ];
     }
 
@@ -61,7 +61,7 @@ class ProfitListTable extends \WP_List_Table {
                 $color = $item['profit'] >= 0 ? 'green' : 'red';
                 return '<span style="color:' . $color . '">' . wc_price( $item['profit'] ) . '</span>';
             default:
-                return esc_html__( 'Not Applicable', 'profit-calculation' );
+                return esc_html__( 'Not Applicable', 'ecommerce-profit-calculation' );
         }
     }
 
@@ -72,14 +72,100 @@ class ProfitListTable extends \WP_List_Table {
         );
     }
 
+    public function extra_tablenav( $which ) {
+        if ( $which == 'top' ) {
+            $from = isset( $_REQUEST['from'] ) ? sanitize_text_field( $_REQUEST['from'] ) : '';
+            $to   = isset( $_REQUEST['to'] ) ? sanitize_text_field( $_REQUEST['to'] ) : '';
+            $year = isset( $_REQUEST['filter_year'] ) ? sanitize_text_field( $_REQUEST['filter_year'] ) : '';
+            $month = isset( $_REQUEST['filter_month'] ) ? sanitize_text_field( $_REQUEST['filter_month'] ) : '';
+            $week = isset( $_REQUEST['filter_week'] ) ? sanitize_text_field( $_REQUEST['filter_week'] ) : '';
+
+            ?>
+            <div class="alignleft actions">
+                <input type="text" name="from" class="ecommerce-datepicker" placeholder="<?php _e( 'From Date', 'ecommerce-profit-calculation' ); ?>" value="<?php echo esc_attr( $from ); ?>" style="width: 120px;">
+                <input type="text" name="to" class="ecommerce-datepicker" placeholder="<?php _e( 'To Date', 'ecommerce-profit-calculation' ); ?>" value="<?php echo esc_attr( $to ); ?>" style="width: 120px;">
+                
+                <select name="filter_year">
+                    <option value=""><?php _e( 'Select Year', 'ecommerce-profit-calculation' ); ?></option>
+                    <?php
+                    $current_year = date('Y');
+                    for ($i = $current_year; $i >= $current_year - 5; $i--) {
+                        echo '<option value="' . $i . '" ' . selected($year, $i, false) . '>' . $i . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <select name="filter_month">
+                    <option value=""><?php _e( 'Select Month', 'ecommerce-profit-calculation' ); ?></option>
+                    <?php
+                    for ($m = 1; $m <= 12; $m++) {
+                        $month_name = date('F', mktime(0, 0, 0, $m, 1));
+                        echo '<option value="' . sprintf('%02d', $m) . '" ' . selected($month, sprintf('%02d', $m), false) . '>' . $month_name . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <select name="filter_week">
+                    <option value=""><?php _e( 'Select Week', 'ecommerce-profit-calculation' ); ?></option>
+                    <?php
+                    for ($w = 1; $w <= 52; $w++) {
+                        echo '<option value="' . $w . '" ' . selected($week, $w, false) . '>' . sprintf(__('Week %d', 'ecommerce-profit-calculation'), $w) . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php _e( 'Filter', 'ecommerce-profit-calculation' ); ?>">
+                <a href="<?php echo admin_url( 'admin.php?page=ecommerce-profit-calculation' ); ?>" class="button"><?php _e( 'Reset', 'ecommerce-profit-calculation' ); ?></a>
+                <input type="submit" name="export_pdf" class="button button-primary" value="<?php _e( 'Export PDF', 'ecommerce-profit-calculation' ); ?>">
+            </div>
+            <?php
+        }
+    }
+
     public function prepare_items() {
         $profit_paged = $this->get_pagenum();
         $per_page = 20;
+
+        $from  = isset( $_REQUEST['from'] ) ? sanitize_text_field( $_REQUEST['from'] ) : '';
+        $to    = isset( $_REQUEST['to'] ) ? sanitize_text_field( $_REQUEST['to'] ) : '';
+        $year  = isset( $_REQUEST['filter_year'] ) ? sanitize_text_field( $_REQUEST['filter_year'] ) : '';
+        $month = isset( $_REQUEST['filter_month'] ) ? sanitize_text_field( $_REQUEST['filter_month'] ) : '';
+        $week  = isset( $_REQUEST['filter_week'] ) ? sanitize_text_field( $_REQUEST['filter_week'] ) : '';
+
         // Fetch ALL orders to filter them correctly and calculate total profit
         $args = [
             'status' => 'any', 
             'limit' => -1,
         ];
+
+        if ( ! empty( $from ) || ! empty( $to ) ) {
+            $args['date_created'] = '';
+            if ( ! empty( $from ) ) {
+                $args['date_created'] .= $from . '...';
+            } else {
+                $args['date_created'] .= '1000-01-01...';
+            }
+
+            if ( ! empty( $to ) ) {
+                $args['date_created'] .= $to;
+            } else {
+                $args['date_created'] .= date('Y-m-d');
+            }
+        } elseif ( ! empty( $week ) ) {
+            $year_for_week = ! empty( $year ) ? $year : date('Y');
+            $dto = new \DateTime();
+            $dto->setISODate($year_for_week, $week);
+            $start = $dto->format('Y-m-d');
+            $dto->modify('+6 days');
+            $end = $dto->format('Y-m-d');
+            $args['date_created'] = $start . '...' . $end;
+        } elseif ( ! empty( $year ) ) {
+            if ( ! empty( $month ) ) {
+                $args['date_created'] = $year . '-' . $month . '-01...' . date( 'Y-m-t', strtotime( $year . '-' . $month . '-01' ) );
+            } else {
+                $args['date_created'] = $year . '-01-01...' . $year . '-12-31';
+            }
+        }
 
         $orders = wc_get_orders( $args );
 
@@ -129,7 +215,13 @@ class ProfitListTable extends \WP_List_Table {
         
         // Use manual pagination on the filtered data
         $total_items = count( $data );
-        $this->items = array_slice( $data, ( ( $profit_paged - 1 ) * $per_page ), $per_page );
+        
+        // If export PDF is requested, we don't want to slice for pagination
+        if ( isset( $_REQUEST['export_pdf'] ) ) {
+            $this->items = $data;
+        } else {
+            $this->items = array_slice( $data, ( ( $profit_paged - 1 ) * $per_page ), $per_page );
+        }
 
         $this->set_pagination_args( [
             'total_items' => $total_items,

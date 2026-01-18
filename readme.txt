@@ -1,4 +1,4 @@
-=== Profit Calculation Ecommerce ===
+=== Ecommerce Profit Calculation ===
 Contributors: samratemily
 Tags: woocommerce, profit, cost, report
 Requires at least: 5.0
@@ -12,11 +12,11 @@ This plugin helps you to calculate profit for your WooCommerce products.
 
 == Description ==
 
-The **Profit Calculation** plugin allows shop administrators to set a "Buying Price" (cost price) for their products. When an order is placed, this cost is recorded in the order item metadata to ensure historical accuracy.
+The **Ecommerce Profit Calculation** plugin allows shop administrators to set a "Buying Price" (cost price) for their products. When an order is placed, this cost is recorded in the order item metadata to ensure historical accuracy.
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/profit-calculation/`.
+1. Upload the plugin files to `/wp-content/plugins/ecommerce-profit-calculation/`.
 2. Run `composer install`.
 3. Activate the plugin through the 'Plugins' screen in WordPress.
 4. Go to any Product > General Tab and set the "Buying Price".

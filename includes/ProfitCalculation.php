@@ -1,14 +1,14 @@
 <?php
 
-namespace Emily\ProfitCalculation;
+namespace Emily\EcommerceProfitCalculation;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-use Emily\ProfitCalculation\ProductMeta;
-use Emily\ProfitCalculation\ProfitTable;
-use Emily\ProfitCalculation\Assets;
+use Emily\EcommerceProfitCalculation\ProductMeta;
+use Emily\EcommerceProfitCalculation\ProfitTable;
+use Emily\EcommerceProfitCalculation\Assets;
 
 /**
  * ProfitCalculation class
@@ -78,12 +78,12 @@ final class ProfitCalculation {
      * @return void
      */
     public function define_constants() {
-        defined( 'PROFIT_CALCULATION_VERSION' ) || define( 'PROFIT_CALCULATION_VERSION', $this->version );
-        defined( 'PROFIT_CALCULATION_FILE' ) || define( 'PROFIT_CALCULATION_FILE', dirname( __DIR__ ) . '/profit-calculation.php' );
-        defined( 'PROFIT_CALCULATION_DIR' ) || define( 'PROFIT_CALCULATION_DIR', dirname( PROFIT_CALCULATION_FILE ) );
-        defined( 'PROFIT_CALCULATION_INC_DIR' ) || define( 'PROFIT_CALCULATION_INC_DIR', PROFIT_CALCULATION_DIR . '/includes' );
-        defined( 'PROFIT_CALCULATION_TEMPLATE_DIR' ) || define( 'PROFIT_CALCULATION_TEMPLATE_DIR', PROFIT_CALCULATION_DIR . '/templates' );
-        defined( 'PROFIT_CALCULATION_PLUGIN_ASSET' ) || define( 'PROFIT_CALCULATION_PLUGIN_ASSET', plugins_url( 'assets', PROFIT_CALCULATION_FILE ) );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_VERSION' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_VERSION', $this->version );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_FILE' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_FILE', dirname( __DIR__ ) . '/ecommerce-profit-calculation.php' );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_DIR' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_DIR', dirname( ECOMMERCE_PROFIT_CALCULATION_FILE ) );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_INC_DIR' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_INC_DIR', ECOMMERCE_PROFIT_CALCULATION_DIR . '/includes' );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_TEMPLATE_DIR' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_TEMPLATE_DIR', ECOMMERCE_PROFIT_CALCULATION_DIR . '/templates' );
+        defined( 'ECOMMERCE_PROFIT_CALCULATION_PLUGIN_ASSET' ) || define( 'ECOMMERCE_PROFIT_CALCULATION_PLUGIN_ASSET', plugins_url( 'assets', ECOMMERCE_PROFIT_CALCULATION_FILE ) );
     }
 
     /**
@@ -92,7 +92,7 @@ final class ProfitCalculation {
      * @return void
      */
     public function init_plugin() {
-        // load_plugin_textdomain( 'profit-calculation', false, dirname( plugin_basename( PROFIT_CALCULATION_FILE ) ) . '/languages' );
+        // load_plugin_textdomain( 'ecommerce-profit-calculation', false, dirname( plugin_basename( ECOMMERCE_PROFIT_CALCULATION_FILE ) ) . '/languages' );
 
         if ( ! class_exists( 'WooCommerce' ) ) {
             return;

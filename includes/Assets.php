@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\ProfitCalculation;
+namespace Emily\EcommerceProfitCalculation;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -26,26 +26,39 @@ class Assets {
             $screen = get_current_screen();
             if ( $screen && 'product' === $screen->post_type ) {
                 wp_enqueue_script(
-                    'profit-calculation-admin',
-                    PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                    'ecommerce-profit-calculation-admin',
+                    ECOMMERCE_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
                     [ 'jquery', 'wp-i18n' ],
-                    PROFIT_CALCULATION_VERSION,
+                    ECOMMERCE_PROFIT_CALCULATION_VERSION,
                     true
                 );
-                wp_set_script_translations( 'profit-calculation-admin', 'profit-calculation-woocommerce', PROFIT_CALCULATION_DIR . '/languages' );
+                wp_set_script_translations( 'ecommerce-profit-calculation-admin', 'ecommerce-profit-calculation', ECOMMERCE_PROFIT_CALCULATION_DIR . '/languages' );
             }
         }
 
         // Enqueue on Profit Calculation Submenu Page
-        // Hook for submenu page usually looks like 'woocommerce_page_profit-calculation'
+        // Hook for submenu page usually looks like 'woocommerce_page_ecommerce-profit-calculation'
         // We can check $_GET['page'] or the $hook string.
-        if ( strpos( $hook, 'profit-calculation' ) !== false ) {
+        if ( strpos( $hook, 'ecommerce-profit-calculation' ) !== false ) {
              wp_enqueue_style(
-                'profit-calculation-admin',
-                PROFIT_CALCULATION_PLUGIN_ASSET . '/css/admin.css',
+                'ecommerce-profit-calculation-admin',
+                ECOMMERCE_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/admin.css',
                 [],
-                PROFIT_CALCULATION_VERSION
+                ECOMMERCE_PROFIT_CALCULATION_VERSION
             );
+
+            // Enqueue datepicker
+            wp_enqueue_script( 'jquery-ui-datepicker' );
+            wp_enqueue_style( 'jquery-ui-style', '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' );
+
+            wp_enqueue_script(
+                'ecommerce-profit-calculation-admin',
+                ECOMMERCE_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                [ 'jquery', 'jquery-ui-datepicker', 'wp-i18n' ],
+                ECOMMERCE_PROFIT_CALCULATION_VERSION,
+                true
+            );
+            wp_set_script_translations( 'ecommerce-profit-calculation-admin', 'ecommerce-profit-calculation', ECOMMERCE_PROFIT_CALCULATION_DIR . '/languages' );
         }
     }
 }

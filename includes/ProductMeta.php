@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\ProfitCalculation;
+namespace Emily\EcommerceProfitCalculation;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -41,23 +41,24 @@ class ProductMeta {
      */
     public function add_buying_price_field() {
         global $post;
-        wp_nonce_field( 'profit_calculation_save_data', 'profit_calculation_meta_nonce' );
+        wp_nonce_field( 'ecommerce_profit_calculation_save_data', 'ecommerce_profit_calculation_meta_nonce' );
 
         $product      = wc_get_product( $post->ID );
         $last_updated = $product ? $product->get_meta( '_buying_price_last_updated' ) : '';
         $description  = '';
 
         if ( $last_updated ) {
-            $description = '<strong>' . sprintf( esc_html__e( 'Last updated: %s', 'profit-calculation' ), date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_updated ) ) ) . '</strong>';
+            /* translators: %s: date and time of last update */
+            $description = '<strong>' . sprintf( esc_html__( 'Last updated: %s', 'ecommerce-profit-calculation' ), date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_updated ) ) ) . '</strong>';
         }
 
         woocommerce_wp_text_input(
             [
                 'id'          => '_buying_price',
-                'label'       => __( 'Buying Price(inc. tax)', 'profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
+                'label'       => __( 'Buying Price(inc. tax)', 'ecommerce-profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
                 'placeholder' => '',
                 'desc_tip'    => true,
-                'description' => __( 'Enter the buying price to calculate profit.', 'profit-calculation' ),
+                'description' => __( 'Enter the buying price to calculate profit.', 'ecommerce-profit-calculation' ),
                 'type'        => 'number',
                 'custom_attributes' => [
                     'step' => 'any',
@@ -81,7 +82,7 @@ class ProductMeta {
      */
     public function save_buying_price_field( $product ) {
         // Nonce validation
-        if ( ! isset( $_POST['profit_calculation_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['profit_calculation_meta_nonce'] ) ), 'profit_calculation_save_data' ) ) {
+        if ( ! isset( $_POST['ecommerce_profit_calculation_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ecommerce_profit_calculation_meta_nonce'] ) ), 'ecommerce_profit_calculation_save_data' ) ) {
             return;
         }
 
@@ -91,7 +92,7 @@ class ProductMeta {
             
             // Validation: Custom field is required
             if ( empty( $buying_price ) && '0' !== $buying_price ) {
-                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'profit-calculation' ) );
+                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'ecommerce-profit-calculation' ) );
             }
             
             $product->update_meta_data( '_buying_price', $buying_price );

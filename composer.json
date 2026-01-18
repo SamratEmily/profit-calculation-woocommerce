@@ -1,14 +1,15 @@
 {
-    "name": "emily/profit-calculation-woocommerce",
+    "name": "emily/ecommerce-profit-calculation",
     "description": "This plugin helps you to calculate profit for your WooCommerce products.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": ">=7.4"
+        "php": ">=7.4",
+        "dompdf/dompdf": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Emily\\ProfitCalculation\\": "includes/"
+            "Emily\\EcommerceProfitCalculation\\": "includes/"
         }
     },
     "authors": [

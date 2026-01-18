@@ -20,4 +20,8 @@ jQuery(function($){
         }
         return true;
     });
+    // Initialize datepicker
+    $('.ecommerce-datepicker').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
 });
