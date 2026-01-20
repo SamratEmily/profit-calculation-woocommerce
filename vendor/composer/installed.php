@@ -1,13 +1,13 @@
 <?php return array(
     'root' => array(
-        'name' => 'emily/ecommerce-profit-calculation',
+        'name' => 'emily/pcw-profit-calculation',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '241d0a9ac3bec1a3e738ddfa8d21a61d819c0cb6',
+        'reference' => '0750e2fc64efd44251ddfe7e028c588d8a5175ac',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'dompdf/dompdf' => array(
@@ -39,10 +39,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'emily/ecommerce-profit-calculation' => array(
+        'emily/pcw-profit-calculation' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '241d0a9ac3bec1a3e738ddfa8d21a61d819c0cb6',
+            'reference' => '0750e2fc64efd44251ddfe7e028c588d8a5175ac',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

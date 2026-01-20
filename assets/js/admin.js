@@ -21,7 +21,7 @@ jQuery(function($){
         return true;
     });
     // Initialize datepicker
-    $('.ecommerce-datepicker').datepicker({
+    $('.pcw-datepicker').datepicker({
         dateFormat: 'yy-mm-dd'
     });
 });

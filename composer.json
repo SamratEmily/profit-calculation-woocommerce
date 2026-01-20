@@ -1,5 +1,5 @@
 {
-    "name": "emily/ecommerce-profit-calculation",
+    "name": "emily/pcw-profit-calculation",
     "description": "This plugin helps you to calculate profit for your WooCommerce products.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Emily\\EcommerceProfitCalculation\\": "includes/"
+            "Emily\\PcwProfitCalculation\\": "includes/"
         }
     },
     "authors": [

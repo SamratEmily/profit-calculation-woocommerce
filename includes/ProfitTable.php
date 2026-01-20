@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\EcommerceProfitCalculation;
+namespace Emily\PcwProfitCalculation;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -23,10 +23,10 @@ class ProfitTable {
         // Submenu Profit Calculation
         add_submenu_page(
             'woocommerce',
-            __( 'Profit Calculation', 'ecommerce-profit-calculation' ),
-            __( 'Profit Calculation', 'ecommerce-profit-calculation' ),
+            __( 'Profit Calculation', 'pcw-profit-calculation' ),
+            __( 'Profit Calculation', 'pcw-profit-calculation' ),
             'manage_woocommerce',
-            'ecommerce-profit-calculation',
+            'pcw-profit-calculation',
             [ $this, 'render_page' ]
         );
     }
@@ -39,11 +39,12 @@ class ProfitTable {
         $table->prepare_items();
 
         if ( isset( $_REQUEST['export_pdf'] ) ) {
+            check_admin_referer( 'pcw_profit_filter' );
             $exporter = new PDFExporter();
             $exporter->export( $table->items, $table->get_total_profit() );
         }
         
-        $template = ECOMMERCE_PROFIT_CALCULATION_TEMPLATE_DIR . '/profit-index.php';
+        $template = PCW_PROFIT_CALCULATION_TEMPLATE_DIR . '/profit-index.php';
         
         if ( file_exists( $template ) ) {
             include $template;

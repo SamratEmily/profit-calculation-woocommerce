@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\EcommerceProfitCalculation;
+namespace Emily\PcwProfitCalculation;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -13,7 +13,7 @@ class PDFExporter {
 
     public function export( $items, $total_profit ) {
         if ( ! class_exists( 'Dompdf\Dompdf' ) ) {
-            wp_die( __( 'PDF library not found.', 'ecommerce-profit-calculation' ) );
+            wp_die( message: esc_html__( 'PDF library not found.', 'pcw-profit-calculation' ) );
         }
 
         $options = new Options();
@@ -29,7 +29,7 @@ class PDFExporter {
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
         
-        $filename = 'profit-report-' . date('Y-m-d') . '.pdf';
+        $filename = 'profit-report-' . wp_date('Y-m-d') . '.pdf';
         
         // Clear any previous output
         if (ob_get_length()) ob_end_clean();
@@ -76,11 +76,15 @@ class PDFExporter {
                     <tr>
                         <td class="header-left">
                             <div class="company-name"><?php bloginfo('name'); ?></div>
-                            <h1><?php _e( 'Profit Calculation Report', 'ecommerce-profit-calculation' ); ?></h1>
+                            <h1><?php esc_html_e( 'Profit Calculation Report', 'pcw-profit-calculation' ); ?></h1>
                         </td>
                         <td class="header-right">
-                            <?php printf( __( 'Report Period: %s', 'ecommerce-profit-calculation' ), date('F j, Y') ); ?><br>
-                            <?php printf( __( 'Generated on %s', 'ecommerce-profit-calculation' ), date('F j, Y H:i') ); ?>
+                            <?php
+                            // Translators: %s: report date range
+                            printf( esc_html__( 'Report Period: %s', 'pcw-profit-calculation' ), esc_html( wp_date('F j, Y') ) ); ?><br>
+                            <?php
+                            // Translators: %s: generation date and time
+                            printf( esc_html__( 'Generated on %s', 'pcw-profit-calculation' ), esc_html( wp_date('F j, Y H:i') ) ); ?>
                         </td>
                     </tr>
                 </table>
@@ -88,11 +92,11 @@ class PDFExporter {
                 <table>
                     <thead>
                         <tr>
-                            <th align="left"><?php _e( 'Order Information', 'ecommerce-profit-calculation' ); ?></th>
-                            <th align="left"><?php _e( 'Order Date', 'ecommerce-profit-calculation' ); ?></th>
-                            <th align="right"><?php _e( 'Selling Price', 'ecommerce-profit-calculation' ); ?></th>
-                            <th align="right"><?php _e( 'Buying Price', 'ecommerce-profit-calculation' ); ?></th>
-                            <th align="right"><?php _e( 'Net Profit', 'ecommerce-profit-calculation' ); ?></th>
+                            <th align="left"><?php esc_html_e( 'Order Information', 'pcw-profit-calculation' ); ?></th>
+                            <th align="left"><?php esc_html_e( 'Order Date', 'pcw-profit-calculation' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Selling Price', 'pcw-profit-calculation' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Buying Price', 'pcw-profit-calculation' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Net Profit', 'pcw-profit-calculation' ); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,9 +117,9 @@ class PDFExporter {
                                     <span class="customer"><?php echo esc_html( $customer_name ); ?></span>
                                 </td>
                                 <td><?php echo esc_html( $date ); ?></td>
-                                <td align="right"><?php echo $selling_price; ?></td>
-                                <td align="right"><?php echo $buying_price; ?></td>
-                                <td align="right" class="<?php echo $profit_class; ?>"><?php echo $profit; ?></td>
+                                <td align="right"><?php echo esc_html( $selling_price ); ?></td>
+                                <td align="right"><?php echo esc_html( $buying_price ); ?></td>
+                                <td align="right" class="<?php echo esc_attr( $profit_class ); ?>"><?php echo esc_html( $profit ); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -124,15 +128,17 @@ class PDFExporter {
                 <div class="total-box">
                     <table style="margin:0; border:none; width: 100%;">
                         <tr style="border:none;">
-                            <td style="border:none; padding: 0;"><strong><?php _e( 'Total Summary Profit', 'ecommerce-profit-calculation' ); ?></strong></td>
-                            <td align="right" style="border:none; padding: 0;"><span class="total-amount"><?php echo $this->format_price( wc_price( $total_profit ) ); ?></span></td>
+                            <td style="border:none; padding: 0;"><strong><?php esc_html_e( 'Total Summary Profit', 'pcw-profit-calculation' ); ?></strong></td>
+                            <td align="right" style="border:none; padding: 0;"><span class="total-amount"><?php echo esc_html( $this->format_price( wc_price( $total_profit ) ) ); ?></span></td>
                         </tr>
                     </table>
                 </div>
                 <div style="clear: both;"></div>
 
                 <div class="footer">
-                    <?php printf( __( '&copy; %s %s. All rights reserved.', 'ecommerce-profit-calculation' ), date('Y'), get_bloginfo('name') ); ?>
+                    <?php
+                    // Translators: %1$s: year, %2$s: site name
+                    printf( esc_html__( '&copy; %1$s %2$s. All rights reserved.', 'pcw-profit-calculation' ), esc_html( wp_date('Y') ), esc_html( get_bloginfo('name') ) ); ?>
                 </div>
             </div>
         </body>
