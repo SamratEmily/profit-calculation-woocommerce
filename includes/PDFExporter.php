@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -13,7 +13,7 @@ class PDFExporter {
 
     public function export( $items, $total_profit ) {
         if ( ! class_exists( 'Dompdf\Dompdf' ) ) {
-            wp_die( message: esc_html__( 'PDF library not found.', 'pcw-profit-calculation' ) );
+            wp_die( message: esc_html__( 'PDF library not found.', 'samrat-profit-calculator-for-woocommerce' ) );
         }
 
         $options = new Options();
@@ -76,15 +76,15 @@ class PDFExporter {
                     <tr>
                         <td class="header-left">
                             <div class="company-name"><?php bloginfo('name'); ?></div>
-                            <h1><?php esc_html_e( 'Profit Calculation Report', 'pcw-profit-calculation' ); ?></h1>
+                            <h1><?php esc_html_e( 'Profit Calculation Report', 'samrat-profit-calculator-for-woocommerce' ); ?></h1>
                         </td>
                         <td class="header-right">
                             <?php
                             // Translators: %s: report date range
-                            printf( esc_html__( 'Report Period: %s', 'pcw-profit-calculation' ), esc_html( wp_date('F j, Y') ) ); ?><br>
+                            printf( esc_html__( 'Report Period: %s', 'samrat-profit-calculator-for-woocommerce' ), esc_html( wp_date('F j, Y') ) ); ?><br>
                             <?php
                             // Translators: %s: generation date and time
-                            printf( esc_html__( 'Generated on %s', 'pcw-profit-calculation' ), esc_html( wp_date('F j, Y H:i') ) ); ?>
+                            printf( esc_html__( 'Generated on %s', 'samrat-profit-calculator-for-woocommerce' ), esc_html( wp_date('F j, Y H:i') ) ); ?>
                         </td>
                     </tr>
                 </table>
@@ -92,11 +92,11 @@ class PDFExporter {
                 <table>
                     <thead>
                         <tr>
-                            <th align="left"><?php esc_html_e( 'Order Information', 'pcw-profit-calculation' ); ?></th>
-                            <th align="left"><?php esc_html_e( 'Order Date', 'pcw-profit-calculation' ); ?></th>
-                            <th align="right"><?php esc_html_e( 'Selling Price', 'pcw-profit-calculation' ); ?></th>
-                            <th align="right"><?php esc_html_e( 'Buying Price', 'pcw-profit-calculation' ); ?></th>
-                            <th align="right"><?php esc_html_e( 'Net Profit', 'pcw-profit-calculation' ); ?></th>
+                            <th align="left"><?php esc_html_e( 'Order Information', 'samrat-profit-calculator-for-woocommerce' ); ?></th>
+                            <th align="left"><?php esc_html_e( 'Order Date', 'samrat-profit-calculator-for-woocommerce' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Selling Price', 'samrat-profit-calculator-for-woocommerce' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Buying Price', 'samrat-profit-calculator-for-woocommerce' ); ?></th>
+                            <th align="right"><?php esc_html_e( 'Net Profit', 'samrat-profit-calculator-for-woocommerce' ); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,7 +128,7 @@ class PDFExporter {
                 <div class="total-box">
                     <table style="margin:0; border:none; width: 100%;">
                         <tr style="border:none;">
-                            <td style="border:none; padding: 0;"><strong><?php esc_html_e( 'Total Summary Profit', 'pcw-profit-calculation' ); ?></strong></td>
+                            <td style="border:none; padding: 0;"><strong><?php esc_html_e( 'Total Summary Profit', 'samrat-profit-calculator-for-woocommerce' ); ?></strong></td>
                             <td align="right" style="border:none; padding: 0;"><span class="total-amount"><?php echo esc_html( $this->format_price( wc_price( $total_profit ) ) ); ?></span></td>
                         </tr>
                     </table>
@@ -138,7 +138,7 @@ class PDFExporter {
                 <div class="footer">
                     <?php
                     // Translators: %1$s: year, %2$s: site name
-                    printf( esc_html__( '&copy; %1$s %2$s. All rights reserved.', 'pcw-profit-calculation' ), esc_html( wp_date('Y') ), esc_html( get_bloginfo('name') ) ); ?>
+                    printf( esc_html__( '&copy; %1$s %2$s. All rights reserved.', 'samrat-profit-calculator-for-woocommerce' ), esc_html( wp_date('Y') ), esc_html( get_bloginfo('name') ) ); ?>
                 </div>
             </div>
         </body>

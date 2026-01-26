@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'emily/pcw-profit-calculation',
+        'name' => 'emily/samrat-profit-calculator-for-woocommerce',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '0750e2fc64efd44251ddfe7e028c588d8a5175ac',
+        'reference' => 'ab9b0060c391a8520ecbddec3ab5c6af83545c8a',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,20 +11,18 @@
     ),
     'versions' => array(
         'dompdf/dompdf' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'a098928a5a17ffffbf4be755dc7dfc7c0e4c83fc',
+            'pretty_version' => 'v3.1.4',
+            'version' => '3.1.4.0',
+            'reference' => 'db712c90c5b9868df3600e64e68da62e78a34623',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dompdf/dompdf',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'dompdf/php-font-lib' => array(
-            'pretty_version' => '1.0.1',
-            'version' => '1.0.1.0',
-            'reference' => '6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d',
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'reference' => 'a6e9a688a2a80016ac080b97be73d3e10c444c9a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dompdf/php-font-lib',
             'aliases' => array(),
@@ -39,10 +37,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'emily/pcw-profit-calculation' => array(
+        'emily/samrat-profit-calculator-for-woocommerce' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '0750e2fc64efd44251ddfe7e028c588d8a5175ac',
+            'reference' => 'ab9b0060c391a8520ecbddec3ab5c6af83545c8a',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -60,7 +58,7 @@
         'sabberworm/php-css-parser' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6f07de239d510d81bf6131c39f164d9a65847e12',
+            'reference' => '416f6a7fe878302223a7b1ce8ccf1915f1934ec7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
             'aliases' => array(
@@ -69,9 +67,9 @@
             'dev_requirement' => false,
         ),
         'thecodingmachine/safe' => array(
-            'pretty_version' => '1.x-dev',
-            'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => '194bf34f635a82d3acd5a88c833f9ca4507f86f6',
+            'pretty_version' => 'v3.3.0',
+            'version' => '3.3.0.0',
+            'reference' => '2cdd579eeaa2e78e51c7509b50cc9fb89a956236',
             'type' => 'library',
             'install_path' => __DIR__ . '/../thecodingmachine/safe',
             'aliases' => array(),

@@ -1,14 +1,14 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-use Emily\PcwProfitCalculation\ProductMeta;
-use Emily\PcwProfitCalculation\ProfitTable;
-use Emily\PcwProfitCalculation\Assets;
+use SamratProfitCalculatorForWooCommerce\ProductMeta;
+use SamratProfitCalculatorForWooCommerce\ProfitTable;
+use SamratProfitCalculatorForWooCommerce\Assets;
 
 /**
  * ProfitCalculation class
@@ -78,12 +78,12 @@ final class ProfitCalculation {
      * @return void
      */
     public function define_constants() {
-        defined( 'PCW_PROFIT_CALCULATION_VERSION' ) || define( 'PCW_PROFIT_CALCULATION_VERSION', $this->version );
-        defined( 'PCW_PROFIT_CALCULATION_FILE' ) || define( 'PCW_PROFIT_CALCULATION_FILE', dirname( __DIR__ ) . '/pcw-profit-calculation.php' );
-        defined( 'PCW_PROFIT_CALCULATION_DIR' ) || define( 'PCW_PROFIT_CALCULATION_DIR', dirname( PCW_PROFIT_CALCULATION_FILE ) );
-        defined( 'PCW_PROFIT_CALCULATION_INC_DIR' ) || define( 'PCW_PROFIT_CALCULATION_INC_DIR', PCW_PROFIT_CALCULATION_DIR . '/includes' );
-        defined( 'PCW_PROFIT_CALCULATION_TEMPLATE_DIR' ) || define( 'PCW_PROFIT_CALCULATION_TEMPLATE_DIR', PCW_PROFIT_CALCULATION_DIR . '/templates' );
-        defined( 'PCW_PROFIT_CALCULATION_PLUGIN_ASSET' ) || define( 'PCW_PROFIT_CALCULATION_PLUGIN_ASSET', plugins_url( 'assets', PCW_PROFIT_CALCULATION_FILE ) );
+        defined( 'SAMRAT_PROFIT_CALCULATION_VERSION' ) || define( 'SAMRAT_PROFIT_CALCULATION_VERSION', $this->version );
+        defined( 'SAMRAT_PROFIT_CALCULATION_FILE' ) || define( 'SAMRAT_PROFIT_CALCULATION_FILE', dirname( __DIR__ ) . '/samrat-profit-calculator-for-woocommerce.php' );
+        defined( 'SAMRAT_PROFIT_CALCULATION_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_DIR', dirname( SAMRAT_PROFIT_CALCULATION_FILE ) );
+        defined( 'SAMRAT_PROFIT_CALCULATION_INC_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_INC_DIR', SAMRAT_PROFIT_CALCULATION_DIR . '/includes' );
+        defined( 'SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR', SAMRAT_PROFIT_CALCULATION_DIR . '/templates' );
+        defined( 'SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET' ) || define( 'SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET', plugins_url( 'assets', SAMRAT_PROFIT_CALCULATION_FILE ) );
     }
 
     /**
@@ -92,7 +92,7 @@ final class ProfitCalculation {
      * @return void
      */
     public function init_plugin() {
-        // load_plugin_textdomain( 'pcw-profit-calculation', false, dirname( plugin_basename( PCW_PROFIT_CALCULATION_FILE ) ) . '/languages' );
+        // load_plugin_textdomain( 'samrat-profit-calculator-for-woocommerce', false, dirname( plugin_basename( SAMRAT_PROFIT_CALCULATION_FILE ) ) . '/languages' );
 
         if ( ! class_exists( 'WooCommerce' ) ) {
             return;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -26,44 +26,44 @@ class Assets {
             $screen = get_current_screen();
             if ( $screen && 'product' === $screen->post_type ) {
                 wp_enqueue_script(
-                    'pcw-profit-calculation-admin',
-                    PCW_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                    'samrat-profit-calculator-for-woocommerce-admin',
+                    SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
                     [ 'jquery', 'wp-i18n' ],
-                    PCW_PROFIT_CALCULATION_VERSION,
+                    SAMRAT_PROFIT_CALCULATION_VERSION,
                     true
                 );
-                wp_set_script_translations( 'pcw-profit-calculation-admin', 'pcw-profit-calculation', PCW_PROFIT_CALCULATION_DIR . '/languages' );
+                wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRAT_PROFIT_CALCULATION_DIR . '/languages' );
             }
         }
 
         // Enqueue on Profit Calculation Submenu Page
-        // Hook for submenu page usually looks like 'woocommerce_page_pcw-profit-calculation'
+        // Hook for submenu page usually looks like 'woocommerce_page_samrat-profit-calculator-for-woocommerce'
         // We can check $_GET['page'] or the $hook string.
-        if ( strpos( $hook, 'pcw-profit-calculation' ) !== false ) {
+        if ( strpos( $hook, 'samrat-profit-calculator-for-woocommerce' ) !== false ) {
              wp_enqueue_style(
-                'pcw-profit-calculation-admin',
-                PCW_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/admin.css',
+                'samrat-profit-calculator-for-woocommerce-admin',
+                 SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/admin.css',
                 [],
-                PCW_PROFIT_CALCULATION_VERSION
+                SAMRAT_PROFIT_CALCULATION_VERSION
             );
-
+ 
             // Enqueue datepicker
             wp_enqueue_script( 'jquery-ui-datepicker' );
             wp_enqueue_style(
                 'jquery-ui-style',
-                PCW_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/jquery-ui.css',
+                SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/jquery-ui.css',
                 [],
                 '1.12.1'
             );
-
+ 
             wp_enqueue_script(
-                'pcw-profit-calculation-admin',
-                PCW_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                'samrat-profit-calculator-for-woocommerce-admin',
+                SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
                 [ 'jquery', 'jquery-ui-datepicker', 'wp-i18n' ],
-                PCW_PROFIT_CALCULATION_VERSION,
+                SAMRAT_PROFIT_CALCULATION_VERSION,
                 true
             );
-            wp_set_script_translations( 'pcw-profit-calculation-admin', 'pcw-profit-calculation', PCW_PROFIT_CALCULATION_DIR . '/languages' );
+            wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRAT_PROFIT_CALCULATION_DIR . '/languages' );
         }
     }
 }

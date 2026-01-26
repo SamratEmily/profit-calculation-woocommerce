@@ -1,15 +1,15 @@
 {
-    "name": "emily/pcw-profit-calculation",
+    "name": "emily/samrat-profit-calculator-for-woocommerce",
     "description": "This plugin helps you to calculate profit for your WooCommerce products.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=7.4",
-        "dompdf/dompdf": "dev-master"
+        "dompdf/dompdf": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "Emily\\PcwProfitCalculation\\": "includes/"
+            "SamratProfitCalculatorForWooCommerce\\": "includes/"
         }
     },
     "authors": [

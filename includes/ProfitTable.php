@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -23,10 +23,10 @@ class ProfitTable {
         // Submenu Profit Calculation
         add_submenu_page(
             'woocommerce',
-            __( 'Profit Calculation', 'pcw-profit-calculation' ),
-            __( 'Profit Calculation', 'pcw-profit-calculation' ),
+            __( 'Profit Calculation', 'samrat-profit-calculator-for-woocommerce' ),
+            __( 'Profit Calculation', 'samrat-profit-calculator-for-woocommerce' ),
             'manage_woocommerce',
-            'pcw-profit-calculation',
+            'samrat-profit-calculator-for-woocommerce',
             [ $this, 'render_page' ]
         );
     }
@@ -44,7 +44,7 @@ class ProfitTable {
             $exporter->export( $table->items, $table->get_total_profit() );
         }
         
-        $template = PCW_PROFIT_CALCULATION_TEMPLATE_DIR . '/profit-index.php';
+        $template = SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR . '/profit-index.php';
         
         if ( file_exists( $template ) ) {
             include $template;

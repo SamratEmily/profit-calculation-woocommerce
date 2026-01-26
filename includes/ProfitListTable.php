@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
     
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -21,9 +21,9 @@ class ProfitListTable extends \WP_List_Table {
     public function __construct() {
         parent::__construct( [
             // Translators: Singular name for profit item
-            'singular' => __('Profit', 'pcw-profit-calculation' ),
+            'singular' => __('Profit', 'samrat-profit-calculator-for-woocommerce' ),
             // Translators: Plural name for profit items
-            'plural'   => __( 'Profits', 'pcw-profit-calculation' ),
+            'plural'   => __( 'Profits', 'samrat-profit-calculator-for-woocommerce' ),
             'ajax'     => false,
         ] );
     }
@@ -31,11 +31,11 @@ class ProfitListTable extends \WP_List_Table {
     public function get_columns() {
         return [
             'cb'      => '<input type="checkbox" />',
-            'order'   => __( 'Order', 'pcw-profit-calculation' ),
-            'date'    => __( 'Date', 'pcw-profit-calculation' ),
-            'selling' => __( 'Selling Price', 'pcw-profit-calculation' ),
-            'buying'  => __( 'Buying Price', 'pcw-profit-calculation' ),
-            'profit'  => __( 'Profit', 'pcw-profit-calculation' ),
+            'order'   => __( 'Order', 'samrat-profit-calculator-for-woocommerce' ),
+            'date'    => __( 'Date', 'samrat-profit-calculator-for-woocommerce' ),
+            'selling' => __( 'Selling Price', 'samrat-profit-calculator-for-woocommerce' ),
+            'buying'  => __( 'Buying Price', 'samrat-profit-calculator-for-woocommerce' ),
+            'profit'  => __( 'Profit', 'samrat-profit-calculator-for-woocommerce' ),
         ];
     }
 
@@ -63,7 +63,7 @@ class ProfitListTable extends \WP_List_Table {
                 $color = $item['profit'] >= 0 ? 'green' : 'red';
                 return '<span style="color:' . $color . '">' . wc_price( $item['profit'] ) . '</span>';
             default:
-                return esc_html__( 'Not Applicable', 'pcw-profit-calculation' );
+                return esc_html__( 'Not Applicable', 'samrat-profit-calculator-for-woocommerce' );
         }
     }
 
@@ -78,7 +78,7 @@ class ProfitListTable extends \WP_List_Table {
         if ( $which == 'top' ) {
             // Nonce verification: Check filter action after sanitization in the next block
             if ( ! empty( $_REQUEST['filter_action'] ) && ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'pcw_profit_filter' ) ) ) {
-                wp_die( esc_html__( 'Nonce verification failed.', 'pcw-profit-calculation' ) );
+                wp_die( esc_html__( 'Nonce verification failed.', 'samrat-profit-calculator-for-woocommerce' ) );
             }
 
             $from  = isset( $_REQUEST['from'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['from'] ) ) : '';
@@ -89,11 +89,11 @@ class ProfitListTable extends \WP_List_Table {
 
             ?>
             <div class="alignleft actions">
-                <input type="text" name="from" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'From Date', 'pcw-profit-calculation' ); ?>" value="<?php echo esc_attr( $from ); ?>" style="width: 120px;">
-                <input type="text" name="to" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'To Date', 'pcw-profit-calculation' ); ?>" value="<?php echo esc_attr( $to ); ?>" style="width: 120px;">
+                <input type="text" name="from" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'From Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $from ); ?>" style="width: 120px;">
+                <input type="text" name="to" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'To Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $to ); ?>" style="width: 120px;">
                 
                 <select name="filter_year">
-                    <option value=""><?php esc_html_e( 'Select Year', 'pcw-profit-calculation' ); ?></option>
+                    <option value=""><?php esc_html_e( 'Select Year', 'samrat-profit-calculator-for-woocommerce' ); ?></option>
                     <?php
                     $current_year = wp_date('Y');
                     for ($i = $current_year; $i >= $current_year - 5; $i--) {
@@ -103,7 +103,7 @@ class ProfitListTable extends \WP_List_Table {
                 </select>
 
                 <select name="filter_month">
-                    <option value=""><?php esc_html_e( 'Select Month', 'pcw-profit-calculation' ); ?></option>
+                    <option value=""><?php esc_html_e( 'Select Month', 'samrat-profit-calculator-for-woocommerce' ); ?></option>
                     <?php
                     for ($m = 1; $m <= 12; $m++) {
                         $month_name = wp_date('F', mktime(0, 0, 0, $m, 1));
@@ -113,19 +113,19 @@ class ProfitListTable extends \WP_List_Table {
                 </select>
 
                 <select name="filter_week">
-                    <option value=""><?php esc_html_e( 'Select Week', 'pcw-profit-calculation' ); ?></option>
+                    <option value=""><?php esc_html_e( 'Select Week', 'samrat-profit-calculator-for-woocommerce' ); ?></option>
                     <?php
                     for ($w = 1; $w <= 52; $w++) {
                         // Translators: %d: Week number
-                        echo '<option value="' . esc_attr( $w ) . '" ' . selected($week, $w, false) . '>' . esc_html( sprintf( __( 'Week %d', 'pcw-profit-calculation' ), $w ) ) . '</option>';
+                        echo '<option value="' . esc_attr( $w ) . '" ' . selected($week, $w, false) . '>' . esc_html( sprintf( __( 'Week %d', 'samrat-profit-calculator-for-woocommerce' ), $w ) ) . '</option>';
                     }
                     ?>
                 </select>
 
                 <?php wp_nonce_field( 'pcw_profit_filter', '_wpnonce' ); ?>
-                <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php esc_attr_e( 'Filter', 'pcw-profit-calculation' ); ?>">
-                <a href="<?php echo esc_url( admin_url( 'admin.php?page=pcw-profit-calculation' ) ); ?>" class="button"><?php esc_html_e( 'Reset', 'pcw-profit-calculation' ); ?></a>
-                <input type="submit" name="export_pdf" class="button button-primary" value="<?php esc_attr_e( 'Export PDF', 'pcw-profit-calculation' ); ?>">
+                <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php esc_attr_e( 'Filter', 'samrat-profit-calculator-for-woocommerce' ); ?>">
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=samrat-profit-calculator-for-woocommerce' ) ); ?>" class="button"><?php esc_html_e( 'Reset', 'samrat-profit-calculator-for-woocommerce' ); ?></a>
+                <input type="submit" name="export_pdf" class="button button-primary" value="<?php esc_attr_e( 'Export PDF', 'samrat-profit-calculator-for-woocommerce' ); ?>">
             </div>
             <?php
         }

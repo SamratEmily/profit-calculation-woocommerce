@@ -1,6 +1,6 @@
 <?php
 
-namespace Emily\PcwProfitCalculation;
+namespace SamratProfitCalculatorForWooCommerce;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -49,16 +49,16 @@ class ProductMeta {
 
         if ( $last_updated ) {
             /* translators: %s: date and time of last update */
-            $description = '<strong>' . sprintf( esc_html__( 'Last updated: %s', 'pcw-profit-calculation' ), date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_updated ) ) ) . '</strong>';
+            $description = '<strong>' . sprintf( esc_html__( 'Last updated: %s', 'samrat-profit-calculator-for-woocommerce' ), date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $last_updated ) ) ) . '</strong>';
         }
 
         woocommerce_wp_text_input(
             [
                 'id'          => '_buying_price',
-                'label'       => __( 'Buying Price(inc. tax)', 'pcw-profit-calculation' ) . ' (' . get_woocommerce_currency_symbol() . ')',
+                'label'       => __( 'Buying Price(inc. tax)', 'samrat-profit-calculator-for-woocommerce' ) . ' (' . get_woocommerce_currency_symbol() . ')',
                 'placeholder' => '',
                 'desc_tip'    => true,
-                'description' => __( 'Enter the buying price to calculate profit.', 'pcw-profit-calculation' ),
+                'description' => __( 'Enter the buying price to calculate profit.', 'samrat-profit-calculator-for-woocommerce' ),
                 'type'        => 'number',
                 'custom_attributes' => [
                     'step' => 'any',
@@ -92,7 +92,7 @@ class ProductMeta {
             
             // Validation: Custom field is required
             if ( empty( $buying_price ) && '0' !== $buying_price ) {
-                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'pcw-profit-calculation' ) );
+                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'samrat-profit-calculator-for-woocommerce' ) );
             }
             
             $product->update_meta_data( '_buying_price', $buying_price );
