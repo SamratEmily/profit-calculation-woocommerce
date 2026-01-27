@@ -1,5 +1,5 @@
 === Samrat Profit Calculator for WooCommerce ===
-Contributors: samratemily
+Contributors: samratemily, emily50
 Tags: woocommerce, profit, cost, report
 Requires at least: 5.0
 Tested up to: 6.9
