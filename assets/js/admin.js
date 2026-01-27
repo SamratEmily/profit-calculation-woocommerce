@@ -4,20 +4,19 @@ jQuery(function($){
         // Check if the _buying_price field exists
         var $buyingPriceField = $('#_buying_price');
         
-        if ( $buyingPriceField.length > 0 ) {
-            var buyingPrice = $buyingPriceField.val();
+        // if ( $buyingPriceField.length > 0 ) {
+        //     var buyingPrice = $buyingPriceField.val();
             
-            // Allow 0, but not empty
-            if ( buyingPrice === '' ) {
-                alert( wp.i18n.__( 'Buying Price is required!', 'profit-calculation-woocommerce' ) );
+        //     // Allow 0, but not empty
+        //     if ( buyingPrice === '' ) {
+        //         alert( wp.i18n.__( 'Buying Price is required!', 'profit-calculation-woocommerce' ) );
                 
-                // Switch to General tab if not active
-                $('.general_options').click();
-                $buyingPriceField.focus();
+        //         $('.general_options').click();
+        //         $buyingPriceField.focus();
                 
-                return false;
-            }
-        }
+        //         return false;
+        //     }
+        // }
         return true;
     });
     // Initialize datepicker

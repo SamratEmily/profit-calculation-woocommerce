@@ -15,6 +15,9 @@ class ProductMeta {
         add_action( 'woocommerce_product_options_pricing', [ $this, 'add_buying_price_field' ] );
         add_action( 'woocommerce_admin_process_product_object', [ $this, 'save_buying_price_field' ] );
         add_action( 'woocommerce_checkout_create_order_line_item', [ $this, 'add_buying_price_to_order_item' ], 10, 4 );
+
+        add_action( 'woocommerce_variation_options_pricing', [ $this, 'add_variation_buying_price_field' ], 10, 3 );
+        add_action( 'woocommerce_save_product_variation', [ $this, 'save_variation_buying_price_field' ], 10, 2 );
     }
 
     /**
@@ -63,7 +66,7 @@ class ProductMeta {
                 'custom_attributes' => [
                     'step' => 'any',
                     'min'  => '0',
-                    'required' => 'required',
+                    // 'required' => 'required',
                 ],
             ]
         );
@@ -91,23 +94,48 @@ class ProductMeta {
             $buying_price = sanitize_text_field( wp_unslash( $_POST['_buying_price'] ) );
             
             // Validation: Custom field is required
-            if ( empty( $buying_price ) && '0' !== $buying_price ) {
-                 \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'samrat-profit-calculator-for-woocommerce' ) );
-            }
+            // if ( empty( $buying_price ) && '0' !== $buying_price ) {
+            //      \WC_Admin_Meta_Boxes::add_error( __( 'Buying Price is required.', 'samrat-profit-calculator-for-woocommerce' ) );
+            // }
             
             $product->update_meta_data( '_buying_price', $buying_price );
             $product->update_meta_data( '_buying_price_last_updated', current_time( 'mysql' ) );
         }
     }
     
-    /**
-     * Optional: Add JS validation if needed, though HTML5 required works often.
-     * But WC tabs might hide the field, so simple HTML5 required might not prevent switching tabs or complex validation.
-     * For now, let's rely on server side check or ensure it's visible. 
-     * However, the prompt says "required field". 
-     * WC save hook doesn't easily stop saving unless we throw exception or use validation hook.
-     * 
-     * Let's stick to basic saving for now.
-     */
+    public function add_variation_buying_price_field( $loop, $variation_data, $variation ) {
+        $product = wc_get_product( $variation->ID );
+        $buying_price = $product->get_meta( '_buying_price' );
+
+        woocommerce_wp_text_input(
+            [
+                'id'            => "_variation_buying_price_{$loop}",
+                'name'          => "_variation_buying_price[{$loop}]",
+                'value'         => $buying_price,
+                'label'         => __( 'Buying Price', 'profit-report' ) . ' (' . get_woocommerce_currency_symbol() . ')',
+                'desc_tip'      => true,
+                'description'   => __( 'Enter the buying price for this variation.', 'profit-report' ),
+                'type'          => 'number',
+                'wrapper_class' => 'form-row form-row-full',
+                'custom_attributes' => [
+                    'step' => 'any',
+                    'min'  => '0',
+                ],
+            ]
+        );
+    }
+
+    public function save_variation_buying_price_field( $variation_id, $i ) {
+        if ( isset( $_POST['_variation_buying_price'][ $i ] ) ) {
+            $buying_price = sanitize_text_field( wp_unslash( $_POST['_variation_buying_price'][ $i ] ) );
+            $product = wc_get_product( $variation_id );
+
+            if ( $product ) {
+                $product->update_meta_data( '_buying_price', $buying_price );
+                $product->update_meta_data( '_buying_price_last_updated', current_time( 'mysql' ) );
+                $product->save();
+            }
+        }
+    }
 
 }
