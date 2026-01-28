@@ -10,8 +10,7 @@ The **Profit Calculation** plugin allows shop administrators to set a "Buying Pr
 
 ### 💰 Profit Management
 - **Buying Price Field**: Adds a "Buying Price (Before Profit)" field to the General tab of WooCommerce Product Data.
-- **Required Field**: Enforces the Buying Price field as required to ensure data integrity.
-- **Order Snapshot**: Automatically saves the Buying Price to the order item metadata (`_buying_price`) when an order is placed. This protects your reports from future cost price changes.
+- **Order Snapshot**: Automatically saves the Buying Price to the order item metadata (`_samrprca_buying_price`) when an order is placed. This protects your reports from future cost price changes.
 
 ### 📊 Profit Reporting
 - **Dedicated Dashboard**: Accessible via `WooCommerce > Profit Calculation`.

@@ -1,14 +1,14 @@
 <?php
 
-namespace SamratProfitCalculatorForWooCommerce;
+namespace Samrprca;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-use SamratProfitCalculatorForWooCommerce\ProductMeta;
-use SamratProfitCalculatorForWooCommerce\ProfitTable;
-use SamratProfitCalculatorForWooCommerce\Assets;
+use Samrprca\ProductMeta;
+use Samrprca\ProfitTable;
+use Samrprca\Assets;
 
 /**
  * ProfitCalculation class
@@ -78,12 +78,12 @@ final class ProfitCalculation {
      * @return void
      */
     public function define_constants() {
-        defined( 'SAMRAT_PROFIT_CALCULATION_VERSION' ) || define( 'SAMRAT_PROFIT_CALCULATION_VERSION', $this->version );
-        defined( 'SAMRAT_PROFIT_CALCULATION_FILE' ) || define( 'SAMRAT_PROFIT_CALCULATION_FILE', dirname( __DIR__ ) . '/samrat-profit-calculator-for-woocommerce.php' );
-        defined( 'SAMRAT_PROFIT_CALCULATION_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_DIR', dirname( SAMRAT_PROFIT_CALCULATION_FILE ) );
-        defined( 'SAMRAT_PROFIT_CALCULATION_INC_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_INC_DIR', SAMRAT_PROFIT_CALCULATION_DIR . '/includes' );
-        defined( 'SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR' ) || define( 'SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR', SAMRAT_PROFIT_CALCULATION_DIR . '/templates' );
-        defined( 'SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET' ) || define( 'SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET', plugins_url( 'assets', SAMRAT_PROFIT_CALCULATION_FILE ) );
+        defined( 'SAMRPRCA_VERSION' ) || define( 'SAMRPRCA_VERSION', $this->version );
+        defined( 'SAMRPRCA_FILE' ) || define( 'SAMRPRCA_FILE', dirname( __DIR__ ) . '/samrat-profit-calculator-for-woocommerce.php' );
+        defined( 'SAMRPRCA_DIR' ) || define( 'SAMRPRCA_DIR', dirname( SAMRPRCA_FILE ) );
+        defined( 'SAMRPRCA_INC_DIR' ) || define( 'SAMRPRCA_INC_DIR', SAMRPRCA_DIR . '/includes' );
+        defined( 'SAMRPRCA_TEMPLATE_DIR' ) || define( 'SAMRPRCA_TEMPLATE_DIR', SAMRPRCA_DIR . '/templates' );
+        defined( 'SAMRPRCA_PLUGIN_ASSET' ) || define( 'SAMRPRCA_PLUGIN_ASSET', plugins_url( 'assets', SAMRPRCA_FILE ) );
     }
 
     /**
@@ -92,7 +92,7 @@ final class ProfitCalculation {
      * @return void
      */
     public function init_plugin() {
-        // load_plugin_textdomain( 'samrat-profit-calculator-for-woocommerce', false, dirname( plugin_basename( SAMRAT_PROFIT_CALCULATION_FILE ) ) . '/languages' );
+        // load_plugin_textdomain( 'samrat-profit-calculator-for-woocommerce', false, dirname( plugin_basename( SAMRPRCA_FILE ) ) . '/languages' );
 
         if ( ! class_exists( 'WooCommerce' ) ) {
             return;

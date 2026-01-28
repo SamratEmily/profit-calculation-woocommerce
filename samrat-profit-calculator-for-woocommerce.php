@@ -13,15 +13,15 @@
  * Tested up to: 6.9
  */
 
-use SamratProfitCalculatorForWooCommerce\ProfitCalculation;
+use Samrprca\ProfitCalculation;
 
 // don't call the file directly
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! defined( 'SAMRAT_PROFIT_CALCULATION_FILE' ) ) {
-    define( 'SAMRAT_PROFIT_CALCULATION_FILE', __FILE__ );
+if ( ! defined( 'SAMRPRCA_FILE' ) ) {
+    define( 'SAMRPRCA_FILE', __FILE__ );
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -29,11 +29,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Load SamratProfitCalculatorForWooCommerce Plugin when all plugins loaded
  *
- * @return \SamratProfitCalculatorForWooCommerce\ProfitCalculation
+ * @return \Samrprca\ProfitCalculation
  */
-function samrat_profit_calculator_for_woocommerce_init() {
+function samrprca_init() {
     return ProfitCalculation::init();
 }
 
 // Lets Go....
-samrat_profit_calculator_for_woocommerce_init();
+samrprca_init();

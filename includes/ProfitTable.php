@@ -1,6 +1,6 @@
 <?php
 
-namespace SamratProfitCalculatorForWooCommerce;
+namespace Samrprca;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -44,7 +44,7 @@ class ProfitTable {
             $exporter->export( $table->items, $table->get_total_profit() );
         }
         
-        $template = SAMRAT_PROFIT_CALCULATION_TEMPLATE_DIR . '/profit-index.php';
+        $template = SAMRPRCA_TEMPLATE_DIR . '/profit-index.php';
         
         if ( file_exists( $template ) ) {
             include $template;

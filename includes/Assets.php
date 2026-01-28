@@ -1,6 +1,6 @@
 <?php
 
-namespace SamratProfitCalculatorForWooCommerce;
+namespace Samrprca;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -27,12 +27,12 @@ class Assets {
             if ( $screen && 'product' === $screen->post_type ) {
                 wp_enqueue_script(
                     'samrat-profit-calculator-for-woocommerce-admin',
-                    SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                    SAMRPRCA_PLUGIN_ASSET . '/js/admin.js',
                     [ 'jquery', 'wp-i18n' ],
-                    SAMRAT_PROFIT_CALCULATION_VERSION,
+                    SAMRPRCA_VERSION,
                     true
                 );
-                wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRAT_PROFIT_CALCULATION_DIR . '/languages' );
+                wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRPRCA_DIR . '/languages' );
             }
         }
 
@@ -42,28 +42,28 @@ class Assets {
         if ( strpos( $hook, 'samrat-profit-calculator-for-woocommerce' ) !== false ) {
              wp_enqueue_style(
                 'samrat-profit-calculator-for-woocommerce-admin',
-                 SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/admin.css',
+                 SAMRPRCA_PLUGIN_ASSET . '/css/admin.css',
                 [],
-                SAMRAT_PROFIT_CALCULATION_VERSION
+                SAMRPRCA_VERSION
             );
  
             // Enqueue datepicker
             wp_enqueue_script( 'jquery-ui-datepicker' );
             wp_enqueue_style(
                 'jquery-ui-style',
-                SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/css/jquery-ui.css',
+                SAMRPRCA_PLUGIN_ASSET . '/css/jquery-ui.css',
                 [],
                 '1.12.1'
             );
  
             wp_enqueue_script(
                 'samrat-profit-calculator-for-woocommerce-admin',
-                SAMRAT_PROFIT_CALCULATION_PLUGIN_ASSET . '/js/admin.js',
+                SAMRPRCA_PLUGIN_ASSET . '/js/admin.js',
                 [ 'jquery', 'jquery-ui-datepicker', 'wp-i18n' ],
-                SAMRAT_PROFIT_CALCULATION_VERSION,
+                SAMRPRCA_VERSION,
                 true
             );
-            wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRAT_PROFIT_CALCULATION_DIR . '/languages' );
+            wp_set_script_translations( 'samrat-profit-calculator-for-woocommerce-admin', 'samrat-profit-calculator-for-woocommerce', SAMRPRCA_DIR . '/languages' );
         }
     }
 }

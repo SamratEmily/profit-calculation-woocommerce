@@ -1,6 +1,6 @@
 <?php
 
-namespace SamratProfitCalculatorForWooCommerce;
+namespace Samrprca;
     
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -186,7 +186,7 @@ class ProfitListTable extends \WP_List_Table {
             
             $items_total_selling = 0;
             $items_total_buying = 0;
-            $has_buying_price = false;
+            $has_samrprca_buying_price = false;
 
             foreach ( $order->get_items() as $item_id => $item ) {
                 if ( ! is_a( $item, 'WC_Order_Item_Product' ) ) {
@@ -198,10 +198,10 @@ class ProfitListTable extends \WP_List_Table {
                     $line_total = $item->get_total(); 
                     
                     // Get buying price from order item (historical data) ONLY
-                    $buying_price = $item->get_meta( '_buying_price' );
+                    $buying_price = $item->get_meta( '_samrprca_buying_price' );
                     
                     if ( $buying_price !== '' && $buying_price !== false ) {
-                        $has_buying_price = true;
+                        $has_samrprca_buying_price = true;
                         $items_total_selling += floatval( $line_total );
                         $items_total_buying += ( floatval( $buying_price ) * $qty );
                     }
@@ -209,7 +209,7 @@ class ProfitListTable extends \WP_List_Table {
             }
 
             // Only add to list if at least one item had a buying price
-            if ( $has_buying_price ) {
+            if ( $has_samrprca_buying_price ) {
                 $profit = $items_total_selling - $items_total_buying;
                 $this->total_profit += $profit;
 

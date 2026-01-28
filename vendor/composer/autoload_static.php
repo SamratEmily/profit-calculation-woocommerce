@@ -93,7 +93,7 @@ class ComposerStaticInitff2366af947f6edbe52577d0c994954d
         'S' => 
         array (
             'Svg\\' => 4,
-            'SamratProfitCalculatorForWooCommerce\\' => 37,
+            'Samrprca\\' => 37,
             'Sabberworm\\CSS\\' => 15,
         ),
         'M' => 
@@ -115,7 +115,7 @@ class ComposerStaticInitff2366af947f6edbe52577d0c994954d
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
         ),
-        'SamratProfitCalculatorForWooCommerce\\' => 
+        'Samrprca\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
         ),
@@ -408,12 +408,12 @@ class ComposerStaticInitff2366af947f6edbe52577d0c994954d
         'Safe\\Exceptions\\YazException' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/Exceptions/YazException.php',
         'Safe\\Exceptions\\ZipException' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/Exceptions/ZipException.php',
         'Safe\\Exceptions\\ZlibException' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/Exceptions/ZlibException.php',
-        'SamratProfitCalculatorForWooCommerce\\Assets' => __DIR__ . '/../..' . '/includes/Assets.php',
-        'SamratProfitCalculatorForWooCommerce\\PDFExporter' => __DIR__ . '/../..' . '/includes/PDFExporter.php',
-        'SamratProfitCalculatorForWooCommerce\\ProductMeta' => __DIR__ . '/../..' . '/includes/ProductMeta.php',
-        'SamratProfitCalculatorForWooCommerce\\ProfitCalculation' => __DIR__ . '/../..' . '/includes/ProfitCalculation.php',
-        'SamratProfitCalculatorForWooCommerce\\ProfitListTable' => __DIR__ . '/../..' . '/includes/ProfitListTable.php',
-        'SamratProfitCalculatorForWooCommerce\\ProfitTable' => __DIR__ . '/../..' . '/includes/ProfitTable.php',
+        'Samrprca\\Assets' => __DIR__ . '/../..' . '/includes/Assets.php',
+        'Samrprca\\PDFExporter' => __DIR__ . '/../..' . '/includes/PDFExporter.php',
+        'Samrprca\\ProductMeta' => __DIR__ . '/../..' . '/includes/ProductMeta.php',
+        'Samrprca\\ProfitCalculation' => __DIR__ . '/../..' . '/includes/ProfitCalculation.php',
+        'Samrprca\\ProfitListTable' => __DIR__ . '/../..' . '/includes/ProfitListTable.php',
+        'Samrprca\\ProfitTable' => __DIR__ . '/../..' . '/includes/ProfitTable.php',
         'Svg\\CssLength' => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg/CssLength.php',
         'Svg\\DefaultStyle' => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg/DefaultStyle.php',
         'Svg\\Document' => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg/Document.php',

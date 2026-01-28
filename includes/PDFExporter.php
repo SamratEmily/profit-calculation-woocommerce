@@ -1,6 +1,6 @@
 <?php
 
-namespace SamratProfitCalculatorForWooCommerce;
+namespace Samrprca;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -39,7 +39,7 @@ class PDFExporter {
     }
 
     private function get_html( $items, $total_profit ) {
-        $css_file = SAMRAT_PROFIT_CALCULATION_DIR . '/assets/css/pdf-style.css';
+        $css_file = SAMRPRCA_DIR . '/assets/css/pdf-style.css';
         $styles   = file_exists( $css_file ) ? file_get_contents( $css_file ) : '';
         
         ob_start();
