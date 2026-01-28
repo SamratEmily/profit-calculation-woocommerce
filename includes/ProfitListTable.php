@@ -60,8 +60,8 @@ class ProfitListTable extends \WP_List_Table {
             case 'buying':
                 return wc_price( $item['buying_price'] );
             case 'profit':
-                $color = $item['profit'] >= 0 ? 'green' : 'red';
-                return '<span style="color:' . $color . '">' . wc_price( $item['profit'] ) . '</span>';
+                $class = $item['profit'] >= 0 ? 'profit-text-green' : 'profit-text-red';
+                return '<span class="' . $class . '">' . wc_price( $item['profit'] ) . '</span>';
             default:
                 return esc_html__( 'Not Applicable', 'samrat-profit-calculator-for-woocommerce' );
         }
@@ -89,8 +89,8 @@ class ProfitListTable extends \WP_List_Table {
 
             ?>
             <div class="alignleft actions">
-                <input type="text" name="from" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'From Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $from ); ?>" style="width: 120px;">
-                <input type="text" name="to" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'To Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $to ); ?>" style="width: 120px;">
+                <input type="text" name="from" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'From Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $from ); ?>">
+                <input type="text" name="to" class="pcw-datepicker" placeholder="<?php esc_attr_e( 'To Date', 'samrat-profit-calculator-for-woocommerce' ); ?>" value="<?php echo esc_attr( $to ); ?>">
                 
                 <select name="filter_year">
                     <option value=""><?php esc_html_e( 'Select Year', 'samrat-profit-calculator-for-woocommerce' ); ?></option>

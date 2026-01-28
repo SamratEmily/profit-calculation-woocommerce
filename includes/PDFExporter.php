@@ -39,36 +39,18 @@ class PDFExporter {
     }
 
     private function get_html( $items, $total_profit ) {
+        $css_file = SAMRAT_PROFIT_CALCULATION_DIR . '/assets/css/pdf-style.css';
+        $styles   = file_exists( $css_file ) ? file_get_contents( $css_file ) : '';
+        
         ob_start();
         ?>
         <!DOCTYPE html>
         <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <style>
-                body { font-family: 'DejaVu Sans', sans-serif; font-size: 10px; color: #444; line-height: 1.5; }
-                .container { padding: 10px; }
-                
-                .header-table { width: 100%; border: none; margin-bottom: 20px; border-bottom: 2px solid #46b450; padding-bottom: 10px; }
-                .header-table td { border: none; padding: 0; vertical-align: bottom; }
-                .header-left .company-name { color: #46b450; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
-                .header-left h1 { color: #1d2327; margin: 0; font-size: 22px; }
-                .header-right { text-align: right; color: #777; font-size: 9px; }
-                
-                table { width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #eee; }
-                th { background-color: #f8f8f8; color: #333; font-weight: bold; text-transform: uppercase; font-size: 9px; border-bottom: 2px solid #46b450; padding: 10px; }
-                td { padding: 8px 10px; border-bottom: 1px solid #eee; }
-                
-                .footer { margin-top: 30px; text-align: center; color: #999; font-size: 8px; }
-                
-                .total-box { margin-top: 20px; float: right; width: 220px; padding: 10px; background-color: #f9fff9; border: 1px solid #46b450; border-radius: 4px; }
-                .total-amount { color: #46b450; font-size: 16px; font-weight: bold; }
-                
-                .profit-green { color: #2e7d32; font-weight: bold; }
-                .profit-red { color: #d32f2f; font-weight: bold; }
-                .order-id { color: #1d2327; font-weight: bold; font-size: 11px; }
-                .customer { color: #666; font-size: 9px; }
-            </style>
+            <?php if ( $styles ) : ?>
+                <style><?php echo $styles; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></style>
+            <?php endif; ?>
         </head>
         <body>
             <div class="container">
@@ -116,7 +98,7 @@ class PDFExporter {
                                     <span class="order-id"><?php echo esc_html( $order_num ); ?></span><br>
                                     <span class="customer"><?php echo esc_html( $customer_name ); ?></span>
                                 </td>
-                                <td><?php echo esc_html( $date ); ?></td>
+                                <td align="left"><?php echo esc_html( $date ); ?></td>
                                 <td align="right"><?php echo esc_html( $selling_price ); ?></td>
                                 <td align="right"><?php echo esc_html( $buying_price ); ?></td>
                                 <td align="right" class="<?php echo esc_attr( $profit_class ); ?>"><?php echo esc_html( $profit ); ?></td>
@@ -126,14 +108,14 @@ class PDFExporter {
                 </table>
 
                 <div class="total-box">
-                    <table style="margin:0; border:none; width: 100%;">
-                        <tr style="border:none;">
-                            <td style="border:none; padding: 0;"><strong><?php esc_html_e( 'Total Summary Profit', 'samrat-profit-calculator-for-woocommerce' ); ?></strong></td>
-                            <td align="right" style="border:none; padding: 0;"><span class="total-amount"><?php echo esc_html( $this->format_price( wc_price( $total_profit ) ) ); ?></span></td>
+                    <table class="total-box-table">
+                        <tr>
+                            <td><strong><?php esc_html_e( 'Total Summary Profit', 'samrat-profit-calculator-for-woocommerce' ); ?></strong></td>
+                            <td align="right"><span class="total-amount"><?php echo esc_html( $this->format_price( wc_price( $total_profit ) ) ); ?></span></td>
                         </tr>
                     </table>
                 </div>
-                <div style="clear: both;"></div>
+                <div class="clearfix"></div>
 
                 <div class="footer">
                     <?php

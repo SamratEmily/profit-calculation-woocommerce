@@ -24,3 +24,26 @@
 .profit-calculation-card .description {
     color: #646970;
 }
+
+/* Buying Price Admin Styles */
+._buying_price_last_updated_field {
+    padding-left: 162px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.pcw-datepicker {
+    width: 120px;
+}
+
+/* Profit List Table Styles */
+.profit-text-green {
+    color: green;
+    font-weight: bold;
+}
+
+.profit-text-red {
+    color: red;
+    font-weight: bold;
+}
+

@@ -72,7 +72,7 @@ class ProductMeta {
         );
 
         if ( $description ) {
-            echo '<p class="form-field _buying_price_last_updated_field" style="padding-left: 162px; margin-top: -10px; margin-bottom: 10px;">';
+            echo '<p class="form-field _buying_price_last_updated_field">';
             echo '<span class="description">' . wp_kses_post( $description ) . '</span>';
             echo '</p>';
         }
