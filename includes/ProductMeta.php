@@ -30,10 +30,19 @@ class ProductMeta {
      */
     public function add_samrprca_buying_price_to_order_item( $item, $cart_item_key, $values, $order ) {
         if ( isset( $values['data'] ) ) {
-            $product = $values['data'];
+            $product      = $values['data'];
             $buying_price = $product->get_meta( '_samrprca_buying_price' );
 
-            if ( $buying_price ) {
+            // If it's a variation and doesn't have a buying price, try to get it from the parent product
+            if ( ( $buying_price === '' || $buying_price === false ) && $product->is_type( 'variation' ) ) {
+                $parent_id      = $product->get_parent_id();
+                $parent_product = wc_get_product( $parent_id );
+                if ( $parent_product ) {
+                    $buying_price = $parent_product->get_meta( '_samrprca_buying_price' );
+                }
+            }
+
+            if ( $buying_price !== '' && $buying_price !== false ) {
                 $item->add_meta_data( '_samrprca_buying_price', $buying_price );
             }
         }
@@ -47,7 +56,7 @@ class ProductMeta {
         wp_nonce_field( 'samrprca_save_data', 'pcw_profit_calculation_meta_nonce' );
 
         $product      = wc_get_product( $post->ID );
-        $last_updated = $product ? $product->get_meta( '_samrprca_samrprca_buying_price_last_updated' ) : '';
+        $last_updated = $product ? $product->get_meta( '_samrprca_buying_price_last_updated' ) : '';
         $description  = '';
 
         if ( $last_updated ) {
@@ -126,8 +135,8 @@ class ProductMeta {
     }
 
     public function save_variation_samrprca_buying_price_field( $variation_id, $i ) {
-        // Nonce verification for variation save
-        if ( ! isset( $_POST['pcw_profit_calculation_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pcw_profit_calculation_meta_nonce'] ) ), 'samrprca_save_data' ) ) {
+        // Nonce verification for variation save (optional, WooCommerce already verifies its own nonces for variations)
+        if ( isset( $_POST['pcw_profit_calculation_meta_nonce'] ) && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pcw_profit_calculation_meta_nonce'] ) ), 'samrprca_save_data' ) ) {
             return;
         }
         if ( isset( $_POST['_variation_samrprca_buying_price'][ $i ] ) ) {

@@ -197,8 +197,22 @@ class ProfitListTable extends \WP_List_Table {
                     $qty = $item->get_quantity();
                     $line_total = $item->get_total(); 
                     
-                    // Get buying price from order item (historical data) ONLY
+                    // Get buying price from order item (historical data)
                     $buying_price = $item->get_meta( '_samrprca_buying_price' );
+
+                    // If not found in order item, fallback to current product buying price
+                    if ( ( $buying_price === '' || $buying_price === false ) && $product ) {
+                        $buying_price = $product->get_meta( '_samrprca_buying_price' );
+
+                        // Fallback to parent if variation
+                        if ( ( $buying_price === '' || $buying_price === false ) && $product->is_type( 'variation' ) ) {
+                            $parent_id      = $product->get_parent_id();
+                            $parent_product = wc_get_product( $parent_id );
+                            if ( $parent_product ) {
+                                $buying_price = $parent_product->get_meta( '_samrprca_buying_price' );
+                            }
+                        }
+                    }
                     
                     if ( $buying_price !== '' && $buying_price !== false ) {
                         $has_samrprca_buying_price = true;
